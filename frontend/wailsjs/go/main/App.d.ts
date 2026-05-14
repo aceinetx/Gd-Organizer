@@ -21,8 +21,6 @@ export function GetSingleModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function InstallMod(arg1:string,arg2:string):Promise<Record<string, any>>;
 
-export function LaunchGame(arg1:string):Promise<void>;
-
 export function MinimizeWindow():Promise<void>;
 
 export function OpenFile(arg1:Array<frontend.FileFilter>):Promise<string>;

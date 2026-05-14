@@ -38,10 +38,6 @@ export function InstallMod(arg1, arg2) {
   return window['go']['main']['App']['InstallMod'](arg1, arg2);
 }
 
-export function LaunchGame(arg1) {
-  return window['go']['main']['App']['LaunchGame'](arg1);
-}
-
 export function MinimizeWindow() {
   return window['go']['main']['App']['MinimizeWindow']();
 }

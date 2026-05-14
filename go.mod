@@ -4,6 +4,8 @@ go 1.26.3
 
 require github.com/wailsapp/wails/v2 v2.12.0
 
+require github.com/Binject/debug v0.0.0-20260128230015-4e22595eaac6 // direct
+
 require (
 	git.sr.ht/~jackmordaunt/go-toast/v2 v2.0.3 // indirect
 	github.com/bep/debounce v1.2.1 // indirect
