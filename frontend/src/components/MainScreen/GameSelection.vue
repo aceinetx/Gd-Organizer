@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div id="game-selection" class="screen">
+    <div id="game-selection">
         <div class="content-view">
             <div class="game-details">
                 <div class="title-section">

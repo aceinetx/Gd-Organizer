@@ -1,20 +1,12 @@
 <script lang="ts" setup>
-import AppSidebar from './AppSidebar.vue';
-import GameSelection from './GameSelection.vue';
-import NoSelection from './NoSelection.vue'
-import SettingsView from './SettingsView.vue'
+import MainScreen from './MainScreen/MainScreen.vue';
 
 </script>
 
 <template>
-  <div class="app-container">
-    <AppSidebar/>
-		<main class="main-content">
-			<SettingsView/>
-      <NoSelection/>
-      <GameSelection/>
-		</main>
-	</div>
+    <div class="app-container">
+        <MainScreen/>
+    </div>
 </template>
 
 <style scoped>
@@ -22,44 +14,6 @@ import SettingsView from './SettingsView.vue'
   display: flex;
   height: 100vh;
   overflow: hidden;
-}
-
-.sidebar {
-  width: 260px;
-  background: var(--bg-sidebar);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  padding-top: 40px; /* Space for brand and window controls */
-  padding-bottom: 20px; /* Keep footer away from window edge */
-}
-
-.sidebar-brand {
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.sidebar-brand img {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.sidebar-brand span {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 0 16px; 
 }
 
 .logo {

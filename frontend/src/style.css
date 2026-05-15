@@ -274,3 +274,53 @@ input:checked+.slider:before {
 .btn-primary:hover {
   background: var(--accent-hover);
 }
+
+.sidebar {
+  width: 260px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px; /* Space for brand and window controls */
+  padding-bottom: 20px; /* Keep footer away from window edge */
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 16px; 
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-entry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+.settings-entry:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-primary);
+}
