@@ -1,18 +1,13 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "gdorganizer",
-  "outputfilename": "GD-Organizer",
-  "frontend:install": "",
-  "frontend:build": "",
-  "frontend:dev:serverUrl": "",
+  "name": "Gd-Organizer",
+  "outputfilename": "Gd-Organizer",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
   "author": {
-    "name": "drmilooo",
-    "email": "drmilooo@users.noreply.github.com"
-  },
-  "info": {
-    "productName": "GD Organizer",
-    "productVersion": "1.0.0",
-    "copyright": "Copyright (c) 2024",
-    "comments": "Lightweight Geometry Dash Launcher & Mod Manager"
+    "name": "aceinetx",
+    "email": "mouselin82@gmail.com"
   }
 }

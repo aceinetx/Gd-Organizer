@@ -1,40 +1,21 @@
 {
-  "name": "gd-organizer",
-  "version": "0.2.0",
-  "description": "GD Organizer - Professional Mod Manager",
-  "main": "main.js",
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "electron .",
-    "dist": "electron-builder --win",
-    "build": "echo 'Wails Build SUCCESS'"
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
   },
-  "build": {
-    "appId": "com.drmilooo.gdorganizer",
-    "productName": "GD Organizer",
-    "copyright": "Copyright © 2026 drmilooo",
-    "directories": {
-      "output": "dist"
-    },
-    "win": {
-      "target": [
-        "portable",
-        "nsis"
-      ],
-      "icon": "icon.png"
-    },
-    "nsis": {
-      "oneClick": true,
-      "allowToChangeInstallationDirectory": false,
-      "createDesktopShortcut": true,
-      "runAfterFinish": true
-    },
-    "files": [
-      "**/*",
-      "!dist"
-    ]
+  "dependencies": {
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "electron": "^29.4.6",
-    "electron-builder": "^24.13.3"
+    "@vitejs/plugin-vue": "^3.0.3",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.7",
+    "vue-tsc": "^1.8.27",
+    "@babel/types": "^7.18.10"
   }
 }
