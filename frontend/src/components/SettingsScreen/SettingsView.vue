@@ -2,7 +2,7 @@
 </script>
 
 <template>
-	<div id="settings-view" class="screen">
+    <main class="main-content">
 		<div class="content-view">
 			<div class="game-details">
 				<h1 id="settings-view-title" style="font-size: 32px; margin-bottom: 8px;">Settings</h1>
@@ -81,7 +81,7 @@
 							<span
 								style="font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase;">Contributors</span>
 							<div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
-								<img src="../assets/logo.png"
+								<img src="../../assets/logo.png"
 									style="width: 32px; height: 32px; border-radius: 8px; object-fit: contain; background: rgba(255,255,255,0.03);">
 								<div>
 									<div style="font-size: 13px; font-weight: 600;">drmilooo</div>
@@ -94,7 +94,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+    </main>
 </template>
 
 <style scoped>

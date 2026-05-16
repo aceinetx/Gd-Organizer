@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import MainScreen from './MainScreen/MainScreen.vue';
+import SettingsScreen from './SettingsScreen/SettingsScreen.vue';
 
 </script>
 
 <template>
     <div class="app-container">
-        <MainScreen/>
+        <SettingsScreen/>
     </div>
 </template>
 
