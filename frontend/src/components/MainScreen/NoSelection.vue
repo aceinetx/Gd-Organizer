@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div id="no-selection">
+    <div id="no-selection" class="screen">
         <div class="hero-content">
             <h2 id="no-selection-title">Select an Instance</h2>
             <p id="no-selection-desc">Choose a folder from the sidebar to manage and play.</p>

@@ -324,3 +324,9 @@ input:checked+.slider:before {
   background: rgba(255,255,255,0.04);
   color: var(--text-primary);
 }
+
+.main-content {
+  flex: 1;
+  position: relative;
+  background-color: var(--bg-app);
+}
