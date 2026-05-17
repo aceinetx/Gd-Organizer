@@ -1,11 +1,29 @@
 <script lang="ts" setup>
+import { ref, useTemplateRef } from "vue";
 import SidebarBrand from "../SidebarBrand.vue";
 import { Tab } from "./Tab";
 
 defineProps<{
     tab: Tab;
     tabChanged?: (tab: Tab) => void;
+    onBack?: () => void;
 }>();
+
+let navbar = ref<HTMLDivElement>();
+
+function doAnimation() {
+    navbar.value?.animate(
+        [
+            { transform: "translateX(-10px)", opacity: 0 },
+            { transform: "translateX(0)", opacity: 1 },
+        ],
+        { duration: 260, easing: "cubic-bezier(.2,.8,.2,1)" },
+    );
+}
+
+defineExpose({
+    doAnimation,
+});
 </script>
 
 <template>
@@ -46,7 +64,11 @@ defineProps<{
         </div>
 
         <div class="sidebar-footer">
-            <div class="settings-entry" id="back-home-btn">
+            <div
+                class="settings-entry"
+                id="back-home-btn"
+                v-on:click="onBack!()"
+            >
                 <svg
                     viewBox="0 0 24 24"
                     width="20"
@@ -74,7 +96,6 @@ defineProps<{
     display: flex;
     flex-direction: column;
     flex: 1;
-    animation: fadeInSidebar 0.3s ease;
 }
 
 .settings-nav-item {
@@ -87,6 +108,7 @@ defineProps<{
     color: var(--text-secondary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.02);
     border-left: 3px solid transparent;
+    text-align: left;
 }
 
 .settings-nav-item:hover {

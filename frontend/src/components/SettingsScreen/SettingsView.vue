@@ -340,4 +340,19 @@ defineProps<{
     font-size: 13px;
     color: var(--text-secondary);
 }
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.setting-item label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: none;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
 </style>

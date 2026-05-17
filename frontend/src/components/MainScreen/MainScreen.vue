@@ -1,13 +1,14 @@
 <script setup lang="tsx">
-import MainSidebar from './MainSidebar.vue';
-import MainView from './MainView.vue';
+import { onMounted, ref } from "vue";
+import MainSidebar from "./MainSidebar.vue";
+import MainView from "./MainView.vue";
 
-const onSettings = () => {
-    console.warn(123)
-}
+defineProps<{
+    settings?: () => void;
+}>();
 </script>
 
 <template>
-    <MainSidebar :settings="onSettings"/>
-    <MainView/>
+    <MainSidebar :settings="settings" />
+    <MainView />
 </template>
