@@ -30,6 +30,10 @@ export function GetMods(arg1) {
   return window['go']['main']['App']['GetMods'](arg1);
 }
 
+export function GetSavePath(arg1) {
+  return window['go']['main']['App']['GetSavePath'](arg1);
+}
+
 export function GetSingleModInfo(arg1) {
   return window['go']['main']['App']['GetSingleModInfo'](arg1);
 }

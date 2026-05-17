@@ -17,6 +17,8 @@ export function FetchModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function GetMods(arg1:string):Promise<Array<main.ModInfo>>;
 
+export function GetSavePath(arg1:string):Promise<string>;
+
 export function GetSingleModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function Greet(arg1:string):Promise<string>;

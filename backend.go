@@ -13,7 +13,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-func (a *App) getSavePath(filename string) string {
+func (a *App) GetSavePath(filename string) string {
 	configDir, err := os.UserConfigDir()
 	if err != nil {
 		configDir = os.Getenv("APPDATA")
@@ -29,7 +29,7 @@ func (a *App) getSavePath(filename string) string {
 }
 
 func (a *App) SaveData(filename string, content string) error {
-	path := a.getSavePath(filename)
+	path := a.GetSavePath(filename)
 	err := os.WriteFile(path, []byte(content), 0644)
 	if err != nil {
 		fmt.Printf("Error saving %s: %v\n", filename, err)
@@ -38,7 +38,7 @@ func (a *App) SaveData(filename string, content string) error {
 }
 
 func (a *App) LoadData(filename string) string {
-	path := a.getSavePath(filename)
+	path := a.GetSavePath(filename)
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return ""
@@ -96,17 +96,17 @@ func (a *App) GetMods(folderPath string) []ModInfo {
 
 				if dependencies, ok := info["dependencies"]; ok {
 					switch d := dependencies.(type) {
-					case []interface{}:
+					case []any:
 						for _, dep := range d {
 							if dID, ok := dep.(string); ok {
 								deps = append(deps, dID)
-							} else if dMap, ok := dep.(map[string]interface{}); ok {
+							} else if dMap, ok := dep.(map[string]any); ok {
 								if dID, ok := dMap["id"].(string); ok {
 									deps = append(deps, dID)
 								}
 							}
 						}
-					case map[string]interface{}:
+					case map[string]any:
 						for k := range d {
 							deps = append(deps, k)
 						}
@@ -122,7 +122,7 @@ func (a *App) GetMods(folderPath string) []ModInfo {
 	return results
 }
 
-func (a *App) extractModInfoNative(zipPath string) map[string]interface{} {
+func (a *App) extractModInfoNative(zipPath string) map[string]any {
 	r, err := zip.OpenReader(zipPath)
 	if err != nil {
 		return nil
@@ -135,7 +135,7 @@ func (a *App) extractModInfoNative(zipPath string) map[string]interface{} {
 				return nil
 			}
 			defer rc.Close()
-			var data map[string]interface{}
+			var data map[string]any
 			json.NewDecoder(rc).Decode(&data)
 			return data
 		}
@@ -143,7 +143,7 @@ func (a *App) extractModInfoNative(zipPath string) map[string]interface{} {
 	return nil
 }
 
-func (a *App) ToggleMod(folderPath string, modID string, enabled bool, fileName string) map[string]interface{} {
+func (a *App) ToggleMod(folderPath string, modID string, enabled bool, fileName string) map[string]any {
 	modsPath := filepath.Join(folderPath, "geode", "mods")
 	oldPath := filepath.Join(modsPath, fileName)
 	newName := strings.TrimSuffix(strings.TrimSuffix(fileName, ".disabled"), ".geode")
@@ -153,7 +153,7 @@ func (a *App) ToggleMod(folderPath string, modID string, enabled bool, fileName 
 		newName += ".geode"
 	}
 	os.Rename(oldPath, filepath.Join(modsPath, newName))
-	return map[string]interface{}{"success": true}
+	return map[string]any{"success": true}
 }
 
 func (a *App) LaunchGame(folderPath string) {
@@ -169,37 +169,37 @@ func (a *App) OpenFile(filters []runtime.FileFilter) string {
 	return res
 }
 
-func (a *App) DeleteMod(folderPath string, fileName string) map[string]interface{} {
+func (a *App) DeleteMod(folderPath string, fileName string) map[string]any {
 	os.Remove(filepath.Join(folderPath, "geode", "mods", fileName))
-	return map[string]interface{}{"success": true}
+	return map[string]any{"success": true}
 }
 
-func (a *App) InstallMod(targetPath string, sourcePath string) map[string]interface{} {
+func (a *App) InstallMod(targetPath string, sourcePath string) map[string]any {
 	dest := filepath.Join(targetPath, "geode", "mods", filepath.Base(sourcePath))
 	out, _ := os.Create(dest)
 	defer out.Close()
 	in, _ := os.Open(sourcePath)
 	defer in.Close()
 	io.Copy(out, in)
-	return map[string]interface{}{"success": true}
+	return map[string]any{"success": true}
 }
 
-func (a *App) GetSingleModInfo(path string) map[string]interface{} {
+func (a *App) GetSingleModInfo(path string) map[string]any {
 	return a.extractModInfoNative(path)
 }
 
-func (a *App) FetchModInfo(id string) map[string]interface{} {
+func (a *App) FetchModInfo(id string) map[string]any {
 	resp, _ := http.Get("https://api.geode-sdk.org/v1/mods/" + id)
 	if resp == nil {
 		return nil
 	}
 	defer resp.Body.Close()
-	var res map[string]interface{}
+	var res map[string]any
 	json.NewDecoder(resp.Body).Decode(&res)
 	return res
 }
 
-func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string]interface{} {
+func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string]any {
 	if gdVersion == "" {
 		gdVersion = "2.206"
 	}
@@ -209,25 +209,25 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string
 	}
 	resp, err := http.Get(url)
 	if err != nil || resp == nil {
-		return map[string]interface{}{"total": 0, "mods": []interface{}{}}
+		return map[string]any{"total": 0, "mods": []any{}}
 	}
 	defer resp.Body.Close()
 
 	body, _ := io.ReadAll(resp.Body)
-	var raw map[string]interface{}
+	var raw map[string]any
 	json.Unmarshal(body, &raw)
 
 	total := 0
-	var finalMods []map[string]interface{}
+	var finalMods []map[string]any
 
-	if payload, ok := raw["payload"].(map[string]interface{}); ok {
+	if payload, ok := raw["payload"].(map[string]any); ok {
 		if c, ok := payload["count"].(float64); ok {
 			total = int(c)
 		}
 
-		if data, ok := payload["data"].([]interface{}); ok {
+		if data, ok := payload["data"].([]any); ok {
 			for _, mRaw := range data {
-				m, ok := mRaw.(map[string]interface{})
+				m, ok := mRaw.(map[string]any)
 				if !ok {
 					continue
 				}
@@ -242,8 +242,8 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string
 				downloadLink := ""
 				developer := "Unknown"
 
-				if versions, ok := m["versions"].([]interface{}); ok && len(versions) > 0 {
-					if v0, ok := versions[0].(map[string]interface{}); ok {
+				if versions, ok := m["versions"].([]any); ok && len(versions) > 0 {
+					if v0, ok := versions[0].(map[string]any); ok {
 						if n, ok := v0["name"].(string); ok {
 							name = n
 						}
@@ -259,9 +259,9 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string
 					}
 				}
 
-				if devs, ok := m["developers"].([]interface{}); ok {
+				if devs, ok := m["developers"].([]any); ok {
 					for _, devRaw := range devs {
-						if dev, ok := devRaw.(map[string]interface{}); ok {
+						if dev, ok := devRaw.(map[string]any); ok {
 							isOwner, _ := dev["is_owner"].(bool)
 							if isOwner {
 								if dName, ok := dev["display_name"].(string); ok {
@@ -273,7 +273,7 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string
 					}
 				}
 
-				finalMods = append(finalMods, map[string]interface{}{
+				finalMods = append(finalMods, map[string]any{
 					"id":            id,
 					"name":          name,
 					"description":   desc,
@@ -288,29 +288,29 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string
 	}
 
 	if finalMods == nil {
-		finalMods = []map[string]interface{}{}
+		finalMods = []map[string]any{}
 	}
 
-	return map[string]interface{}{
+	return map[string]any{
 		"total": total,
 		"mods":  finalMods,
 	}
 }
 
-func (a *App) DownloadCatalogMod(folderPath string, downloadURL string, modID string) map[string]interface{} {
+func (a *App) DownloadCatalogMod(folderPath string, downloadURL string, modID string) map[string]any {
 	dest := filepath.Join(folderPath, "geode", "mods", modID+".geode")
 	out, err := os.Create(dest)
 	if err != nil {
-		return map[string]interface{}{"success": false, "error": err.Error()}
+		return map[string]any{"success": false, "error": err.Error()}
 	}
 	defer out.Close()
 	resp, err := http.Get(downloadURL)
 	if err != nil {
-		return map[string]interface{}{"success": false, "error": err.Error()}
+		return map[string]any{"success": false, "error": err.Error()}
 	}
 	defer resp.Body.Close()
 	io.Copy(out, resp.Body)
-	return map[string]interface{}{"success": true}
+	return map[string]any{"success": true}
 }
 
 func (a *App) CloseWindow()    { runtime.Quit(a.ctx) }
