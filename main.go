@@ -28,6 +28,8 @@ func main() {
 		Bind: []interface{}{
 			app,
 		},
+		Frameless:     true,
+		DisableResize: true,
 	})
 
 	if err != nil {
