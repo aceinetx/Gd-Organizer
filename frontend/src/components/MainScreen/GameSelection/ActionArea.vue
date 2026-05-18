@@ -10,7 +10,7 @@ defineProps<{
     <div class="action-area">
         <div class="button-group">
             <button id="play-btn" class="primary-btn">
-                <span id="play-btn-text">PLAY</span>
+                <span id="play-btn-text">Launch</span>
                 <svg
                     viewBox="0 0 24 24"
                     width="24"
