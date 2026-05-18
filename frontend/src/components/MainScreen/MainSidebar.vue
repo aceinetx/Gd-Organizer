@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { main } from "../../../wailsjs/go/models";
 import GameInstance from "../GameInstance.vue";
 import SidebarBrand from "../SidebarBrand.vue";
+import NameModal from "../Modals/NameModal.vue";
 
 let instances = ref<Array<main.GameInstance>>([
     new main.GameInstance({
@@ -19,8 +20,12 @@ let instances = ref<Array<main.GameInstance>>([
     }),
 ]);
 
+let showInstanceModal = ref(false);
+
 defineProps<{
+    onGameSelected?: (instance: main.GameInstance) => void;
     settings?: () => void;
+    selectedInstance?: main.GameInstance;
 }>();
 </script>
 
@@ -33,13 +38,32 @@ defineProps<{
                 class="add-btn"
                 id="add-folder-btn"
                 title="Add Geometry Dash Instance"
+                @click="showInstanceModal = true"
             >
                 +
             </button>
         </div>
 
+        <Teleport to="body">
+            <NameModal
+                :active="showInstanceModal"
+                @close="showInstanceModal = false"
+                @add="
+                    (name) => {
+                        console.log(name);
+                        showInstanceModal = false;
+                    }
+                "
+            />
+        </Teleport>
+
         <div class="folder-list">
-            <GameInstance v-for="instance in instances" :instance="instance" />
+            <GameInstance
+                v-for="instance in instances"
+                :instance="instance"
+                :active="instance == selectedInstance"
+                @click="(instance) => onGameSelected!(instance)"
+            />
         </div>
 
         <div class="sidebar-footer">
