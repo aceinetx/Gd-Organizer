@@ -1,15 +1,26 @@
 <script setup lang="ts">
+import { main } from "../../wailsjs/go/models";
+
 defineProps<{
-    isGeode: boolean;
-    name: string;
-    path: string;
+    instance: main.GameInstance;
 }>();
 </script>
 
 <template>
-    <div style="display: flex; align-items: center; gap: 12px; min-width: 0">
-        <img src="../assets/geodelogo.png" class="icon" v-if="isGeode" />
-        <img src="../assets/Geometrylogo.png" class="icon" v-if="!isGeode" />
+    <div
+        style="display: flex; align-items: center; gap: 12px; min-width: 0"
+        id="game-instance"
+    >
+        <img
+            src="../assets/geodelogo.png"
+            class="icon"
+            v-if="instance.hasGeode"
+        />
+        <img
+            src="../assets/Geometrylogo.png"
+            class="icon"
+            v-if="!instance.hasGeode"
+        />
         <div style="min-width: 0; flex: 1">
             <h4
                 style="
@@ -19,7 +30,7 @@ defineProps<{
                     text-overflow: ellipsis;
                 "
             >
-                {{ name }}
+                {{ instance.name }}
             </h4>
             <p
                 style="
@@ -31,7 +42,7 @@ defineProps<{
                     text-overflow: ellipsis;
                 "
             >
-                {{ path }}
+                {{ instance.path }}
             </p>
         </div>
     </div>
@@ -42,11 +53,20 @@ div {
     text-align: left;
 }
 
-img .icon {
+.icon {
     width: 24px;
     height: 24px;
     border-radius: 4px;
     object-fit: contain;
     flex-shrink: 0;
+}
+
+#game-instance {
+    padding: 12px 16px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
 }
 </style>

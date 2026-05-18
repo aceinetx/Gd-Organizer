@@ -19,18 +19,22 @@ export namespace frontend {
 
 export namespace main {
 	
-	export class GameAnalysis {
+	export class GameInstance {
 	    hasGeode: boolean;
 	    version: string;
+	    name: string;
+	    path: string;
 	
 	    static createFrom(source: any = {}) {
-	        return new GameAnalysis(source);
+	        return new GameInstance(source);
 	    }
 	
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.hasGeode = source["hasGeode"];
 	        this.version = source["version"];
+	        this.name = source["name"];
+	        this.path = source["path"];
 	    }
 	}
 	export class ModInfo {

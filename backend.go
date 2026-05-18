@@ -46,13 +46,8 @@ func (a *App) LoadData(filename string) string {
 	return string(data)
 }
 
-type GameAnalysis struct {
-	HasGeode bool   `json:"hasGeode"`
-	Version  string `json:"version"`
-}
-
-func (a *App) AnalyzeGame(folderPath string) GameAnalysis {
-	return GameAnalysis{HasGeode: false, Version: "2.206"}
+func (a *App) AnalyzeGame(folderPath string) GameInstance {
+	return GameInstance{HasGeode: false, Version: "2.206"}
 }
 
 func (a *App) GetMods(folderPath string) []ModInfo {
@@ -315,13 +310,3 @@ func (a *App) DownloadCatalogMod(folderPath string, downloadURL string, modID st
 
 func (a *App) CloseWindow()    { runtime.Quit(a.ctx) }
 func (a *App) MinimizeWindow() { runtime.WindowMinimise(a.ctx) }
-
-type ModInfo struct {
-	ID           string   `json:"id"`
-	Name         string   `json:"name"`
-	Enabled      bool     `json:"enabled"`
-	Version      string   `json:"version"`
-	Description  string   `json:"description"`
-	File         string   `json:"file"`
-	Dependencies []string `json:"dependencies"`
-}

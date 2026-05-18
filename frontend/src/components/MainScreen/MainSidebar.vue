@@ -1,6 +1,23 @@
 <script lang="ts" setup>
+import { ref } from "vue";
+import { main } from "../../../wailsjs/go/models";
 import GameInstance from "../GameInstance.vue";
 import SidebarBrand from "../SidebarBrand.vue";
+
+let instances = ref<Array<main.GameInstance>>([
+    new main.GameInstance({
+        hasGeode: true,
+        version: "2.2081",
+        name: "Geode instance",
+        path: "/home/aceinet/gd",
+    }),
+    new main.GameInstance({
+        hasGeode: false,
+        version: "2.2081",
+        name: "Vanilla instance",
+        path: "/home/aceinet/gd2",
+    }),
+]);
 
 defineProps<{
     settings?: () => void;
@@ -21,8 +38,8 @@ defineProps<{
             </button>
         </div>
 
-        <div class="folder-list" id="folder-list">
-            <GameInstance :is-geode="true" name="Geometry dash" path="a" />
+        <div class="folder-list">
+            <GameInstance v-for="instance in instances" :instance="instance" />
         </div>
 
         <div class="sidebar-footer">

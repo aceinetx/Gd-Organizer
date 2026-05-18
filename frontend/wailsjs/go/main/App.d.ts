@@ -3,7 +3,7 @@
 import {main} from '../models';
 import {frontend} from '../models';
 
-export function AnalyzeGame(arg1:string):Promise<main.GameAnalysis>;
+export function AnalyzeGame(arg1:string):Promise<main.GameInstance>;
 
 export function BrowseCatalog(arg1:number,arg2:string,arg3:string):Promise<Record<string, any>>;
 
