@@ -102,6 +102,7 @@ let showCatalogModal = ref(false);
     <Teleport to="body">
         <CatalogModal
             :active="showCatalogModal"
+            :instance="instance"
             @close="showCatalogModal = false"
         />
     </Teleport>

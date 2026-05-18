@@ -1,10 +1,17 @@
 <script lang="ts" setup>
 import { ref } from "vue";
+import { BrowseCatalog } from "../../../wailsjs/go/main/App";
+import { main } from "../../../wailsjs/go/models";
 
 defineProps<{
     onClose?: () => void;
     active: boolean;
+    instance: main.GameInstance;
 }>();
+
+BrowseCatalog(0, "", "2.2081").then((catalog) => {
+    console.log(catalog);
+});
 </script>
 
 <template>
@@ -54,7 +61,10 @@ defineProps<{
                         color: var(--accent);
                         margin: 0 0 10px 0;
                     "
-                ></p>
+                >
+                    Installing to:
+                    {{ instance.name }}
+                </p>
                 <div
                     class="search-box"
                     style="width: 100%; margin-bottom: 12px"

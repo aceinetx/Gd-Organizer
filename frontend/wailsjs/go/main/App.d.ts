@@ -5,7 +5,7 @@ import {frontend} from '../models';
 
 export function AnalyzeGame(arg1:string):Promise<main.GameInstance>;
 
-export function BrowseCatalog(arg1:number,arg2:string,arg3:string):Promise<Record<string, any>>;
+export function BrowseCatalog(arg1:number,arg2:string,arg3:string):Promise<main.ModCatalog>;
 
 export function CloseWindow():Promise<void>;
 

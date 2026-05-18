@@ -194,30 +194,35 @@ func (a *App) FetchModInfo(id string) map[string]any {
 	return res
 }
 
-func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string]any {
-	if gdVersion == "" {
-		gdVersion = "2.206"
-	}
-	url := fmt.Sprintf("https://api.geode-sdk.org/v1/mods?page=%d&per_page=15&status=accepted&platforms=win&gd=%s", page, gdVersion)
-	if query != "" {
-		url += "&query=" + query
-	}
-	resp, err := http.Get(url)
-	if err != nil || resp == nil {
-		return map[string]any{"total": 0, "mods": []any{}}
-	}
-	defer resp.Body.Close()
+func (a *App) BrowseCatalog(page int, query string, gdVersion string) ModCatalog {
+	catalog := ModCatalog{Total: 0, Mods: []CatalogModInfo{}}
 
-	body, _ := io.ReadAll(resp.Body)
+	var body []byte
+	{
+		url := fmt.Sprintf("https://api.geode-sdk.org/v1/mods?page=%d&per_page=15&status=accepted&platforms=win&gd=%s", page, gdVersion)
+		if query != "" {
+			url += "&query=" + query
+		}
+
+		resp, err := http.Get(url)
+		if err != nil {
+			return catalog
+		}
+
+		body, err = io.ReadAll(resp.Body)
+		if err != nil {
+			return catalog
+		}
+
+		resp.Body.Close()
+	}
+
 	var raw map[string]any
 	json.Unmarshal(body, &raw)
 
-	total := 0
-	var finalMods []map[string]any
-
 	if payload, ok := raw["payload"].(map[string]any); ok {
 		if c, ok := payload["count"].(float64); ok {
-			total = int(c)
+			catalog.Total = int(c)
 		}
 
 		if data, ok := payload["data"].([]any); ok {
@@ -268,28 +273,21 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) map[string
 					}
 				}
 
-				finalMods = append(finalMods, map[string]any{
-					"id":            id,
-					"name":          name,
-					"description":   desc,
-					"version":       version,
-					"developer":     developer,
-					"downloads":     downloads,
-					"download_link": downloadLink,
-					"featured":      featured,
+				catalog.Mods = append(catalog.Mods, CatalogModInfo{
+					Id:           id,
+					Name:         name,
+					Desc:         desc,
+					Version:      version,
+					Developer:    developer,
+					Downloads:    downloads,
+					DownloadLink: downloadLink,
+					Featured:     featured,
 				})
 			}
 		}
 	}
 
-	if finalMods == nil {
-		finalMods = []map[string]any{}
-	}
-
-	return map[string]any{
-		"total": total,
-		"mods":  finalMods,
-	}
+	return catalog
 }
 
 func (a *App) DownloadCatalogMod(folderPath string, downloadURL string, modID string) map[string]any {
