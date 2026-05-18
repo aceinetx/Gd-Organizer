@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { main } from "../../../../wailsjs/go/models";
+import CatalogModal from "../../Modals/CatalogModal.vue";
 
 defineProps<{
     instance: main.GameInstance;
 }>();
+
+let showCatalogModal = ref(false);
 </script>
 
 <template>
@@ -82,6 +86,7 @@ defineProps<{
                     id="geode-catalog-btn"
                     class="install-mod-btn"
                     title="Browse Geode Catalog"
+                    @click="showCatalogModal = true"
                 >
                     <img
                         src="../../../assets/geodelogo.png"
@@ -93,6 +98,13 @@ defineProps<{
         </div>
         <div id="mods-list" class="mods-grid"></div>
     </div>
+
+    <Teleport to="body">
+        <CatalogModal
+            :active="showCatalogModal"
+            @close="showCatalogModal = false"
+        />
+    </Teleport>
 </template>
 
 <style scoped>

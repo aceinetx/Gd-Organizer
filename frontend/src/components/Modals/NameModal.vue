@@ -45,3 +45,18 @@ let name = ref("");
         </div>
     </div>
 </template>
+
+<style scoped>
+.modal input:not([type="checkbox"]) {
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+}
+</style>
