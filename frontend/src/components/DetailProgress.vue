@@ -23,7 +23,10 @@ defineProps<{ progress: number }>();
                 overflow: hidden;
             "
         >
-            <div id="detail-progress-bar"></div>
+            <div
+                id="detail-progress-bar"
+                :style="{ width: Math.round(progress) }"
+            ></div>
         </div>
     </div>
 </template>
@@ -31,7 +34,6 @@ defineProps<{ progress: number }>();
 <style scoped>
 #detail-progress-bar {
     height: 100%;
-    width: v-bind(progress);
     background: var(--accent);
     border-radius: 4px;
     transition: width 0.15s ease;
