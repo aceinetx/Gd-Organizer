@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { onMounted, onUnmounted, reactive, ref } from "vue";
 import { main } from "../../../wailsjs/go/models";
 import { formatDownloads } from "../../util";
 import { InstallMod } from "../../../wailsjs/go/main/App";
 import DetailProgress from "../DetailProgress.vue";
-import { EventsOn } from "../../../wailsjs/runtime/runtime";
+import { EventsOff, EventsOn } from "../../../wailsjs/runtime/runtime";
 
 const props = defineProps<{
     onClose?: () => void;
@@ -17,8 +17,14 @@ const props = defineProps<{
 
 let progress = ref(0);
 
-EventsOn("install-progress", (percentage: number) => {
-    progress.value = percentage;
+onMounted(() => {
+    EventsOn("install-progress", (percentage: number) => {
+        progress.value = percentage;
+    });
+});
+
+onUnmounted(() => {
+    EventsOff("install-prorgess");
 });
 
 function install() {

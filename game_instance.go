@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -41,14 +40,14 @@ func (a *App) InstallMod(game *GameInstance, downloadURL string, modID string) e
 
 	ip := InstallProgress{}
 	ip.ProgressCallback = func(Written int64, Total int64) {
-		fmt.Printf("%d/%d", Written, Total)
-		runtime.EventsEmit(a.ctx, "install-progress", Written/Total*100)
+		percentage := Written / Total * 100
+		runtime.EventsEmit(a.ctx, "install-progress", percentage)
 	}
 	ip.Total = resp.ContentLength
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
-	io.Copy(out, io.TeeReader(resp.Body, &InstallProgress{}))
+	io.Copy(out, io.TeeReader(resp.Body, &ip))
 	return nil
 }
