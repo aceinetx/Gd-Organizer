@@ -1,20 +1,24 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { main } from "../../wailsjs/go/models";
+import InstallPreviewModal from "./Modals/InstallPreviewModal.vue";
+import { formatDownloads } from "../util";
 
 defineProps<{
     mod: main.CatalogModInfo;
     installed: boolean;
+    instance: main.GameInstance;
 }>();
 
-function formatDownloads(n: number) {
-    if (n >= 1000000) return (n / 1000000).toFixed(1) + "M";
-    if (n >= 1000) return (n / 1000).toFixed(1) + "K";
-    return String(n);
-}
+let installModalActive = ref(false);
 </script>
 
 <template>
-    <div class="mod-info-box mod-card" style="flex: 1; min-width: 0">
+    <div
+        class="mod-info-box mod-card"
+        style="flex: 1; min-width: 0"
+        @click="installModalActive = true"
+    >
         <div style="min-width: 0">
             <div style="display: flex; align-items: center; gap: 6px">
                 <span class="mod-name">{{ mod.Name }}</span>
@@ -63,6 +67,17 @@ function formatDownloads(n: number) {
             <path d="M9 18l6-6-6-6" />
         </svg>
     </div>
+
+    <Teleport to="body">
+        <InstallPreviewModal
+            :active="installModalActive"
+            :mod="mod"
+            :installed="installed"
+            :instance="instance"
+            @close="installModalActive = false"
+            @install="installModalActive = false"
+        />
+    </Teleport>
 </template>
 
 <style scoped>
@@ -98,6 +113,7 @@ function formatDownloads(n: number) {
     position: relative;
     z-index: 1;
     text-align: left;
+    cursor: pointer;
 }
 
 .mod-card:hover {

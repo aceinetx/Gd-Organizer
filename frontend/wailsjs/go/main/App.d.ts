@@ -11,8 +11,6 @@ export function CloseWindow():Promise<void>;
 
 export function DeleteMod(arg1:string,arg2:string):Promise<Record<string, any>>;
 
-export function DownloadCatalogMod(arg1:string,arg2:string,arg3:string):Promise<Record<string, any>>;
-
 export function FetchModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function GetMods(arg1:string):Promise<Array<main.ModInfo>>;
@@ -23,7 +21,7 @@ export function GetSingleModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function Greet(arg1:string):Promise<string>;
 
-export function InstallMod(arg1:string,arg2:string):Promise<Record<string, any>>;
+export function InstallMod(arg1:main.GameInstance,arg2:string,arg3:string):Promise<void>;
 
 export function LaunchGame(arg1:string):Promise<void>;
 

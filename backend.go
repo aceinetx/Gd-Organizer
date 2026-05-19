@@ -169,6 +169,7 @@ func (a *App) DeleteMod(folderPath string, fileName string) map[string]any {
 	return map[string]any{"success": true}
 }
 
+/*
 func (a *App) InstallMod(targetPath string, sourcePath string) map[string]any {
 	dest := filepath.Join(targetPath, "geode", "mods", filepath.Base(sourcePath))
 	out, _ := os.Create(dest)
@@ -178,6 +179,7 @@ func (a *App) InstallMod(targetPath string, sourcePath string) map[string]any {
 	io.Copy(out, in)
 	return map[string]any{"success": true}
 }
+*/
 
 func (a *App) GetSingleModInfo(path string) map[string]any {
 	return a.extractModInfoNative(path)
@@ -288,22 +290,6 @@ func (a *App) BrowseCatalog(page int, query string, gdVersion string) ModCatalog
 	}
 
 	return catalog
-}
-
-func (a *App) DownloadCatalogMod(folderPath string, downloadURL string, modID string) map[string]any {
-	dest := filepath.Join(folderPath, "geode", "mods", modID+".geode")
-	out, err := os.Create(dest)
-	if err != nil {
-		return map[string]any{"success": false, "error": err.Error()}
-	}
-	defer out.Close()
-	resp, err := http.Get(downloadURL)
-	if err != nil {
-		return map[string]any{"success": false, "error": err.Error()}
-	}
-	defer resp.Body.Close()
-	io.Copy(out, resp.Body)
-	return map[string]any{"success": true}
 }
 
 func (a *App) CloseWindow()    { runtime.Quit(a.ctx) }

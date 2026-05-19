@@ -14,7 +14,7 @@ defineProps<{
         <div class="content-view">
             <GameDetails :instance="instance" />
             <ActionArea :instance="instance" />
-            <ModsContainer :instance="instance" />
+            <ModsContainer v-if="instance.hasGeode" :instance="instance" />
         </div>
     </div>
 </template>

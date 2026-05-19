@@ -126,6 +126,7 @@ onMounted(() => {
                     v-for="mod in catalog.Mods"
                     :mod="mod"
                     :installed="false"
+                    :instance="instance"
                 />
             </div>
             <div
