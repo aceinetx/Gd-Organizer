@@ -8,6 +8,7 @@ defineProps<{
 }>();
 
 let showCatalogModal = ref(false);
+let catalogModal = ref<InstanceType<typeof CatalogModal> | null>();
 </script>
 
 <template>
@@ -101,9 +102,14 @@ let showCatalogModal = ref(false);
 
     <Teleport to="body">
         <CatalogModal
+            ref="catalogModal"
             :active="showCatalogModal"
             :instance="instance"
-            @close="showCatalogModal = false"
+            @close="
+                showCatalogModal = false;
+                catalogModal!.page = 1;
+                catalogModal!.reload();
+            "
         />
     </Teleport>
 </template>

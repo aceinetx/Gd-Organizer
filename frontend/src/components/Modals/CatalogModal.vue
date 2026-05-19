@@ -1,16 +1,31 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { BrowseCatalog } from "../../../wailsjs/go/main/App";
 import { main } from "../../../wailsjs/go/models";
+import ModCard from "../ModCard.vue";
 
-defineProps<{
+const props = defineProps<{
     onClose?: () => void;
     active: boolean;
     instance: main.GameInstance;
 }>();
 
-BrowseCatalog(0, "", "2.2081").then((catalog) => {
-    console.log(catalog);
+let page = ref(1);
+let catalog = ref(reactive(new main.ModCatalog()));
+
+function reload() {
+    console.log("reload");
+
+    if (page.value < 0) page.value = 0;
+    BrowseCatalog(page.value, "", "2.2081").then((cat) => {
+        catalog.value = cat;
+    });
+}
+
+defineExpose({ page, reload });
+
+onMounted(() => {
+    reload();
 });
 </script>
 
@@ -60,6 +75,7 @@ BrowseCatalog(0, "", "2.2081").then((catalog) => {
                         font-size: 11px;
                         color: var(--accent);
                         margin: 0 0 10px 0;
+                        text-align: left;
                     "
                 >
                     Installing to:
@@ -105,7 +121,13 @@ BrowseCatalog(0, "", "2.2081").then((catalog) => {
                     margin-top: 10px;
                     min-height: 200px;
                 "
-            ></div>
+            >
+                <ModCard
+                    v-for="mod in catalog.Mods"
+                    :mod="mod"
+                    :installed="false"
+                />
+            </div>
             <div
                 style="
                     display: flex;
@@ -120,6 +142,10 @@ BrowseCatalog(0, "", "2.2081").then((catalog) => {
                     id="catalog-prev"
                     class="btn-secondary"
                     style="padding: 6px 14px; font-size: 12px"
+                    @click="
+                        page--;
+                        reload();
+                    "
                 >
                     ← Prev
                 </button>
@@ -131,6 +157,10 @@ BrowseCatalog(0, "", "2.2081").then((catalog) => {
                     id="catalog-next"
                     class="btn-secondary"
                     style="padding: 6px 14px; font-size: 12px"
+                    @click="
+                        page++;
+                        reload();
+                    "
                 >
                     Next →
                 </button>
