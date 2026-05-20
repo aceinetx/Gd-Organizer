@@ -1,15 +1,28 @@
 <script setup lang="ts">
+import { reactive } from "vue";
 import { main } from "../../../../wailsjs/go/models";
+import ErrorModal, { ErrorModalSettings } from "../../Modals/ErrorModal.vue";
+import { LaunchGame } from "../../../../wailsjs/go/main/App";
 
-defineProps<{
+const props = defineProps<{
     instance: main.GameInstance;
 }>();
+
+let errorModalSettings = reactive(new ErrorModalSettings());
+
+function launch() {
+    LaunchGame(props.instance).catch((error) => {
+        errorModalSettings.title = "Launch error";
+        errorModalSettings.text = error;
+        errorModalSettings.active = true;
+    });
+}
 </script>
 
 <template>
     <div class="action-area">
         <div class="button-group">
-            <button id="play-btn" class="primary-btn">
+            <button id="play-btn" class="primary-btn" @click="launch()">
                 <span id="play-btn-text">Launch</span>
                 <svg
                     viewBox="0 0 24 24"
@@ -40,6 +53,13 @@ defineProps<{
             </button>
         </div>
     </div>
+
+    <Teleport to="body">
+        <ErrorModal
+            @ok="errorModalSettings.active = false"
+            :settings="errorModalSettings"
+        />
+    </Teleport>
 </template>
 
 <style scoped>

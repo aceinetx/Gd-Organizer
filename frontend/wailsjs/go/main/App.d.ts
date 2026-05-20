@@ -19,11 +19,9 @@ export function GetSavePath(arg1:string):Promise<string>;
 
 export function GetSingleModInfo(arg1:string):Promise<Record<string, any>>;
 
-export function Greet(arg1:string):Promise<string>;
-
 export function InstallMod(arg1:main.GameInstance,arg2:string,arg3:string):Promise<void>;
 
-export function LaunchGame(arg1:string):Promise<void>;
+export function LaunchGame(arg1:main.GameInstance):Promise<void>;
 
 export function LoadData(arg1:string):Promise<string>;
 

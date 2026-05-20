@@ -25,7 +25,7 @@ defineProps<{ progress: number }>();
         >
             <div
                 id="detail-progress-bar"
-                :style="{ width: Math.round(progress) }"
+                :style="{ width: `${Math.round(progress)}%` }"
             ></div>
         </div>
     </div>

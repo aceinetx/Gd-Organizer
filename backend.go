@@ -151,9 +151,6 @@ func (a *App) ToggleMod(folderPath string, modID string, enabled bool, fileName 
 	return map[string]any{"success": true}
 }
 
-func (a *App) LaunchGame(folderPath string) {
-}
-
 func (a *App) OpenFolder() string {
 	res, _ := runtime.OpenDirectoryDialog(a.ctx, runtime.OpenDialogOptions{Title: "Select GD Folder"})
 	return res
