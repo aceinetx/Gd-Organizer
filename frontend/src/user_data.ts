@@ -22,4 +22,28 @@ export function updateStyle() {
     "--accent-hover",
     data.AccentHover,
   );
+
+  document.body.classList.remove(
+    "light",
+    "dark",
+    "midnight",
+    "black-hole",
+    "nullscapes",
+    "kocmoc",
+  );
+
+  let theme = data.Theme;
+
+  if (theme === "system") {
+    theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  console.log(theme);
+  if (["light", "dark", "black-hole", "nullscapes", "kocmoc"].includes(theme)) {
+    document.body.classList.add(theme);
+  } else {
+    document.body.classList.add("dark");
+  }
 }

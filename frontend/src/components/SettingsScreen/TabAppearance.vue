@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AccentColorButton from "./AccentColorButton.vue";
+import ThemeCard from "./ThemeCard.vue";
 </script>
 
 <template>
@@ -8,9 +9,9 @@ import AccentColorButton from "./AccentColorButton.vue";
             <div class="setting-item">
                 <label id="label-theme">Standard Themes</label>
                 <div class="theme-choices">
-                    <div class="theme-card" id="theme-dark-btn">Dark</div>
-                    <div class="theme-card" id="theme-light-btn">Light</div>
-                    <div class="theme-card" id="theme-system-btn">System</div>
+                    <ThemeCard name="Dark" theme-id="dark" />
+                    <ThemeCard name="Light" theme-id="light" />
+                    <ThemeCard name="System" theme-id="system" />
                 </div>
 
                 <label
@@ -19,40 +20,9 @@ import AccentColorButton from "./AccentColorButton.vue";
                     >Live Themes</label
                 >
                 <div class="theme-choices">
-                    <div class="theme-card" id="theme-black-hole-btn">
-                        Black Hole
-                    </div>
-                    <div class="theme-card" id="theme-nullscapes-btn">
-                        Nullscapes
-                    </div>
-                    <div
-                        class="theme-card"
-                        id="theme-kocmoc-btn"
-                        style="
-                            display: flex;
-                            align-items: center;
-                            gap: 8px;
-                            justify-content: center;
-                        "
-                    >
-                        <svg
-                            viewBox="0 0 24 24"
-                            width="14"
-                            height="14"
-                            fill="currentColor"
-                            style="
-                                color: #000;
-                                filter: drop-shadow(
-                                    0 0 2px rgba(255, 255, 255, 0.3)
-                                );
-                            "
-                        >
-                            <path
-                                d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"
-                            />
-                        </svg>
-                        <span>Kocmoc</span>
-                    </div>
+                    <ThemeCard name="Black hole" theme-id="black-hole" />
+                    <ThemeCard name="Nullscapes" theme-id="nullscapes" />
+                    <ThemeCard name="Kocmoc" theme-id="kocmoc" :star="true" />
                 </div>
             </div>
 
@@ -79,27 +49,5 @@ import AccentColorButton from "./AccentColorButton.vue";
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-}
-
-.theme-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border);
-    padding: 10px;
-    border-radius: var(--radius-md);
-    text-align: center;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-}
-
-.theme-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-}
-
-.theme-card.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    font-weight: 700;
 }
 </style>

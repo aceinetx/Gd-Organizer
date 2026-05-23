@@ -20,12 +20,12 @@
 html {
   background-color: rgba(27, 38, 54, 1);
   text-align: center;
-  color: white;
+  color: var(--text-primary);
 }
 
 body {
   margin: 0;
-  color: white;
+  color: var(--text-primary);
   font-family:
     "Nunito",
     -apple-system,
@@ -88,7 +88,7 @@ body {
 .primary-btn {
   background: var(--accent);
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   padding: 12px 32px;
   border-radius: var(--radius-md);
   font-size: 14px;
@@ -134,13 +134,13 @@ input:checked + .slider:before {
 
 .btn-secondary:hover {
   background: var(--bg-card);
-  color: white;
+  color: var(--text-primary);
 }
 
 .btn-primary {
   background: var(--accent);
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   padding: 10px 20px;
   border-radius: var(--radius-md);
   font-weight: 500;

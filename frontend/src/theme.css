@@ -1,0 +1,113 @@
+body.light {
+  --bg-app: #ffffff;
+  --bg-sidebar: #f2f3f5;
+  --bg-card: #ffffff;
+  --text-primary: #060607;
+  --text-secondary: #2e3338;
+  --text-dim: #5c6067;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+body.midnight {
+  --bg-app: #000000;
+  --bg-sidebar: #050505;
+  --bg-card: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #b5bac1;
+  --text-dim: #72767d;
+  --border: #1a1a1a;
+}
+
+body.black-hole {
+  --bg-app: transparent;
+  --bg-sidebar: #000000;
+  --bg-card: rgba(0, 0, 0, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: #b5bac1;
+  --text-dim: #72767d;
+  --border: #1a1a1a;
+}
+
+body.kocmoc {
+  --bg-app: transparent;
+  --bg-sidebar: rgba(19, 19, 19, 0.45);
+  --bg-card: rgba(30, 30, 30, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: #b5bac1;
+  --text-dim: #72767d;
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+body.kocmoc .sidebar {
+  background: var(--bg-sidebar) !important;
+  backdrop-filter: blur(15px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.nullscapes {
+  --bg-app: transparent;
+  --bg-sidebar: rgba(43, 45, 49, 0.95);
+  --bg-card: rgba(49, 51, 56, 0.4);
+  --text-primary: #dbdee1;
+  --text-secondary: #949ba4;
+  --text-dim: #6d6f78;
+  --border: rgba(255, 255, 255, 0.05);
+}
+
+.theme-bg-video {
+  position: absolute;
+  top: 0;
+  left: 260px; /* Default sidebar width offset */
+  width: calc(100% - 260px);
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  display: none;
+  opacity: 0.8;
+}
+
+body.kocmoc .theme-bg-video {
+  left: 0;
+  width: 100%;
+}
+
+body.black-hole .black-hole-bg {
+  display: block;
+}
+body.nullscapes .nullscapes-bg {
+  display: block;
+}
+body.kocmoc .kocmoc-bg {
+  display: block;
+}
+
+body.black-hole .main-content,
+body.nullscapes .main-content,
+body.kocmoc .main-content {
+  background: transparent !important;
+}
+
+body.black-hole .mod-card,
+body.black-hole .theme-card,
+body.nullscapes .mod-card,
+body.nullscapes .theme-card,
+body.kocmoc .mod-card,
+body.kocmoc .theme-card,
+body.black-hole .about-section,
+body.nullscapes .about-section,
+body.kocmoc .about-section {
+  backdrop-filter: blur(10px);
+  background: rgba(49, 51, 56, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+body.black-hole .settings-card,
+body.nullscapes .settings-card,
+body.kocmoc .settings-card {
+  background: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  padding-left: 0;
+  padding-right: 0;
+}

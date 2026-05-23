@@ -79,7 +79,7 @@
 .about-section h3 {
     font-size: 16px;
     margin-bottom: 4px;
-    color: white;
+    color: var(--text-primary);
 }
 
 .about-section p {

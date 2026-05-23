@@ -122,6 +122,7 @@ export namespace main {
 	export class UserData {
 	    AccentColor: string;
 	    AccentHover: string;
+	    Theme: string;
 	
 	    static createFrom(source: any = {}) {
 	        return new UserData(source);
@@ -131,6 +132,7 @@ export namespace main {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.AccentColor = source["AccentColor"];
 	        this.AccentHover = source["AccentHover"];
+	        this.Theme = source["Theme"];
 	    }
 	}
 

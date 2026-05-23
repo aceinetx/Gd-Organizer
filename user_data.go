@@ -11,12 +11,14 @@ import (
 type UserData struct {
 	AccentColor string
 	AccentHover string
+	Theme       string
 }
 
 func NewUserData() *UserData {
 	return &UserData{
 		AccentColor: "#0084cc",
 		AccentHover: "#0073b3",
+		Theme:       "dark",
 	}
 }
 
