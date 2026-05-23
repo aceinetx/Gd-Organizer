@@ -13,39 +13,6 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
-func (a *App) GetSavePath(filename string) string {
-	configDir, err := os.UserConfigDir()
-	if err != nil {
-		configDir = os.Getenv("APPDATA")
-	}
-	dir := filepath.Join(configDir, "GD-Organizer")
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		err := os.MkdirAll(dir, 0755)
-		if err != nil {
-			fmt.Println("Error creating config dir:", err)
-		}
-	}
-	return filepath.Join(dir, filename)
-}
-
-func (a *App) SaveData(filename string, content string) error {
-	path := a.GetSavePath(filename)
-	err := os.WriteFile(path, []byte(content), 0644)
-	if err != nil {
-		fmt.Printf("Error saving %s: %v\n", filename, err)
-	}
-	return err
-}
-
-func (a *App) LoadData(filename string) string {
-	path := a.GetSavePath(filename)
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return ""
-	}
-	return string(data)
-}
-
 func (a *App) AnalyzeGame(folderPath string) GameInstance {
 	return GameInstance{HasGeode: false, Version: "2.206"}
 }

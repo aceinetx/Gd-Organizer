@@ -119,6 +119,20 @@ export namespace main {
 	        this.dependencies = source["dependencies"];
 	    }
 	}
+	export class UserData {
+	    AccentColor: string;
+	    AccentHover: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new UserData(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.AccentColor = source["AccentColor"];
+	        this.AccentHover = source["AccentHover"];
+	    }
+	}
 
 }
 

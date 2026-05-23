@@ -1,3 +1,22 @@
+:root {
+  --bg-app: #313338;
+  --bg-sidebar: #2b2d31;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --accent: #0084cc;
+  --accent-rgb: 0, 132, 204;
+  --accent-hover: #0073b3;
+  --text-primary: #dbdee1;
+  --text-secondary: #949ba4;
+  --text-dim: #6d6f78;
+  --border: rgba(255, 255, 255, 0.06);
+  --radius-lg: 8px;
+  --radius-md: 6px;
+  --radius-sm: 4px;
+  --font-main:
+    "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
 html {
   background-color: rgba(27, 38, 54, 1);
   text-align: center;
@@ -34,25 +53,6 @@ body {
 #app {
   height: 100vh;
   text-align: center;
-}
-
-:root {
-  --bg-app: #313338;
-  --bg-sidebar: #2b2d31;
-  --bg-card: rgba(255, 255, 255, 0.04);
-  --accent: #0084cc;
-  --accent-rgb: 0, 132, 204;
-  --accent-hover: #0073b3;
-  --text-primary: #dbdee1;
-  --text-secondary: #949ba4;
-  --text-dim: #6d6f78;
-  --border: rgba(255, 255, 255, 0.06);
-  --radius-lg: 8px;
-  --radius-md: 6px;
-  --radius-sm: 4px;
-  --font-main:
-    "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
-    sans-serif;
 }
 
 * {
@@ -253,4 +253,31 @@ input:checked + .slider:before {
 
 .search-box input::placeholder {
   color: var(--text-dim);
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.setting-item label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.about-section,
+.settings-card {
+  margin-top: 10px;
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }

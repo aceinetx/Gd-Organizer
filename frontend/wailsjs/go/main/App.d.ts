@@ -15,15 +15,13 @@ export function FetchModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function GetMods(arg1:string):Promise<Array<main.ModInfo>>;
 
-export function GetSavePath(arg1:string):Promise<string>;
-
 export function GetSingleModInfo(arg1:string):Promise<Record<string, any>>;
 
 export function InstallMod(arg1:main.GameInstance,arg2:string,arg3:string):Promise<void>;
 
 export function LaunchGame(arg1:main.GameInstance):Promise<void>;
 
-export function LoadData(arg1:string):Promise<string>;
+export function LoadUserData():Promise<main.UserData>;
 
 export function MinimizeWindow():Promise<void>;
 
@@ -31,6 +29,6 @@ export function OpenFile(arg1:Array<frontend.FileFilter>):Promise<string>;
 
 export function OpenFolder():Promise<string>;
 
-export function SaveData(arg1:string,arg2:string):Promise<void>;
+export function SaveUserData(arg1:main.UserData):Promise<void>;
 
 export function ToggleMod(arg1:string,arg2:string,arg3:boolean,arg4:string):Promise<Record<string, any>>;

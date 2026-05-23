@@ -26,10 +26,6 @@ export function GetMods(arg1) {
   return window['go']['main']['App']['GetMods'](arg1);
 }
 
-export function GetSavePath(arg1) {
-  return window['go']['main']['App']['GetSavePath'](arg1);
-}
-
 export function GetSingleModInfo(arg1) {
   return window['go']['main']['App']['GetSingleModInfo'](arg1);
 }
@@ -42,8 +38,8 @@ export function LaunchGame(arg1) {
   return window['go']['main']['App']['LaunchGame'](arg1);
 }
 
-export function LoadData(arg1) {
-  return window['go']['main']['App']['LoadData'](arg1);
+export function LoadUserData() {
+  return window['go']['main']['App']['LoadUserData']();
 }
 
 export function MinimizeWindow() {
@@ -58,8 +54,8 @@ export function OpenFolder() {
   return window['go']['main']['App']['OpenFolder']();
 }
 
-export function SaveData(arg1, arg2) {
-  return window['go']['main']['App']['SaveData'](arg1, arg2);
+export function SaveUserData(arg1) {
+  return window['go']['main']['App']['SaveUserData'](arg1);
 }
 
 export function ToggleMod(arg1, arg2, arg3, arg4) {
