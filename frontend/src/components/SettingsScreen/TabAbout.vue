@@ -86,4 +86,8 @@
     font-size: 13px;
     color: var(--text-secondary);
 }
+
+* {
+    text-align: left;
+}
 </style>

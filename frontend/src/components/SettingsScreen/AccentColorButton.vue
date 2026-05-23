@@ -15,7 +15,10 @@ function switchColor() {
 <template>
     <div
         class="accent-color-btn"
-        :style="{ background: colorHex }"
+        :style="{
+            background: colorHex,
+        }"
+        :class="{ active: data.AccentColor == props.colorHex }"
         @click="switchColor()"
     ></div>
 </template>
