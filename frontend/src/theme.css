@@ -54,19 +54,6 @@ body.nullscapes {
   --border: rgba(255, 255, 255, 0.05);
 }
 
-.theme-bg-video {
-  position: absolute;
-  top: 0;
-  left: 260px; /* Default sidebar width offset */
-  width: calc(100% - 260px);
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: -1;
-  display: none;
-  opacity: 0.8;
-}
-
 body.kocmoc .theme-bg-video {
   left: 0;
   width: 100%;

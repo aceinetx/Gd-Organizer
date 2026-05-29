@@ -3,7 +3,6 @@
   --bg-sidebar: #2b2d31;
   --bg-card: rgba(255, 255, 255, 0.04);
   --accent: #0084cc;
-  --accent-rgb: 0, 132, 204;
   --accent-hover: #0073b3;
   --text-primary: #dbdee1;
   --text-secondary: #949ba4;
@@ -99,13 +98,13 @@ body {
   gap: 10px;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.2);
+  box-shadow: 0 4px 5px rgb(from var(--accent) r g b / 0.2);
 }
 
 .primary-btn:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 6px 20px rgb(from var(--accent) r g b / 0.3);
 }
 
 .primary-btn:active {
