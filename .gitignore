@@ -30,3 +30,5 @@ gd-settings.json
 
 # Backups
 oldbackp/
+
+.direnv
